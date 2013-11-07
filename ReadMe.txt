@@ -1,7 +1,7 @@
 Author: Yu-Chieh Fang (Rain) and Tri Nguyen
 Author Email: YCFang87@gmail.com
 
-Last Updated: 11-06-2013
+Last Updated: 11-07-2013
 
 About this project:
 
@@ -15,8 +15,10 @@ Currently implemented features:
 -A remote server to act as a database (Parse Cloud)
 -Uses a combination of ESPN's api and web scraping to retrieve information for ParseCloud
 -Fighter searching, that will bring you to fighter profile
+-From the fighter profile, you can select a 2nd fighter to compare him with (comparison search)
+-fighter images and win-loss breakdown.
 
 Upcoming features:
--Comparison search
+-Fight record intersection
 -Event search
 -Event listing

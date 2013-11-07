@@ -1,17 +1,16 @@
 package yftvn.ufc;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.parse.Parse;
 
 public class FighterProfileActivity extends Activity {
 
@@ -35,6 +34,13 @@ public class FighterProfileActivity extends Activity {
 	private static final String PHOTO_URL_FORMAT = "http://a.espncdn.com/combiner/i?img=/i/headshots/mma/players/full/%d.png&w=%d&h=%d";
 	private static final int PHOTO_DEFAULT_WIDTH = 250;
 	private static final int PHOTO_DEFAULT_HEIGHT = 181;
+	
+	/**
+	 * The ESPN ID for the fighter this profile will display.
+	 * This value will also be sent to comparison search so the comparison search
+	 * can display a mini profile for the same fighter.
+	 */
+	private int espnId;
 
 	@Override
 	/**
@@ -48,7 +54,7 @@ public class FighterProfileActivity extends Activity {
 		initFighterViewInfo();
 		// Get Fighter ESPN Id.
 		Bundle bundle = getIntent().getExtras();
-		int espnId = bundle.getInt("espnId");
+		espnId = bundle.getInt("espnId");
 		if (espnId > 0) {
 			// Config ImageLoader.
 			ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
@@ -74,11 +80,32 @@ public class FighterProfileActivity extends Activity {
 		mImgView = (ImageView) findViewById(R.id.fighterPic);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.fighter_profile, menu);
+	@Override 
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{ 
+		super.onCreateOptionsMenu(menu); 
+
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.fighter_profile, menu);
 		return true;
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+		super.onOptionsItemSelected(item);
+		
+		switch (item.getItemId()) 
+		{
+			case R.id.comparison_search:
+				Intent intent = new Intent(FighterProfileActivity.this,
+						ComparisonSearchActivity.class);
+				intent.putExtra("espnId", espnId);
+				startActivity(intent);
+				return true;
+		}
+		return false;
 	}
 
 	/**
