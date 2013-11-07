@@ -5,7 +5,7 @@ Last Updated: 11-07-2013
 
 About this project:
 
-Currently in it's alpha state. It's not complete yet.
+Currently in its' alpha state. It's not complete yet.
 
 This app is one intended to compare 2 UFC fighters, for the purpose of forming a prediction on the outcome of a fight, scheduled or hypothetical.
 
